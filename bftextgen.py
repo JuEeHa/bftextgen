@@ -157,6 +157,8 @@ def genbf(logic):
 			program += change_cell(change)
 
 			tape_pointer = cell
+		else:
+			raise Bftextgen_invalid_IR(command)
 
 	return program
 
