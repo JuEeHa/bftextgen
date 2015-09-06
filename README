@@ -2,3 +2,5 @@ Library for generating brainfuck programs that output the inputted text
 
 import bftextgen
 bf_program = bftextgen.bf(text)
+
+note: text should be an unicode string
