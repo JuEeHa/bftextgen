@@ -12,15 +12,11 @@ class Bftextgen_exception(Exception):
 	def __init__(self, value):
 		self.value = value
 
-class Bftextgen_invalid_IR(Bftextgen_exception):
-	def __str__(self):
-		return 'Invalid IR form: %s' % self.value
-
-# Returns -1 on not found.
+# Returns -1 on not found, index of the cell with byte in range if found.
 def locate_in_range(tape, byte):
-	for i in range(len(tape)):
-		if abs(tape[i] - byte) <= max_inrange:
-			return i
+	for i in range(len(tape)): # Go through tape
+		if abs(tape[i] - byte) <= max_inrange: # Is a byte in range to be reused?
+			return i # Return its index
 	return -1
 
 # ------------------------------------------------------------------
@@ -63,6 +59,10 @@ def genlogic(text):
 
 # ------------------------------------------------------------------
 # Helper functions for genbf()
+
+class Bftextgen_invalid_IR(Bftextgen_exception):
+	def __str__(self):
+		return 'Invalid IR form: %s' % self.value
 
 def move_tape_pointer(change):
 	if change < 0:
