@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import sys
 from math import sqrt
 
 # Parameters for the text gen
@@ -25,7 +26,11 @@ def locate_in_range(tape, byte):
 # ------------------------------------------------------------------
 
 def genlogic(text):
-	bytes = [ord(byte) for byte in text.encode('utf-8')] # Assume byte-based implementation using utf-8
+	# Assume byte-based implementation using utf-8
+	if sys.version_info.major < 3:
+		bytes = [ord(byte) for byte in text.encode('utf-8')] # Work like 1-char strings
+	else:
+		bytes = [byte for byte in text.encode('utf-8')] # Work like ints
 
 	tape = [] # Keep track of what we already have stored
 	program = []
@@ -81,7 +86,7 @@ def set_cell(value):
 			while i <= max_factor:
 				if rest%i == 0:
 					factors.append(i)
-					rest = rest / i
+					rest = int(rest / i)
 					break
 				i += 1
 
@@ -125,7 +130,6 @@ def set_cell(value):
 # ------------------------------------------------------------------
 
 def genbf(logic):
-	print logic #debg
 	tape_pointer = 0
 
 	program = ''
@@ -170,7 +174,10 @@ def bf(text):
 if __name__ == '__main__':
 	while True:
 		try:
-			text = raw_input().decode('utf-8')
+			if sys.version_info.major < 3:
+				text = raw_input().decode('utf-8') # Need to manually convert to unicode string
+			else:
+				text = input()
 		except EOFError:
 			break
-		print bf(text)
+		print(bf(text))
