@@ -61,6 +61,7 @@ def genlogic(text):
 	
 	return program
 
+# ------------------------------------------------------------------
 # Helper functions for genbf()
 
 def move_tape_pointer(change):
