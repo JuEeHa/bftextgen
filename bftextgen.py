@@ -3,7 +3,7 @@ import sys
 from math import sqrt
 
 # Parameters for the text gen
-max_inrange = 10 # How big difference between a byte in tape and new byte can be for byte reusage
+max_inrange = 20 # How big difference between a byte in tape and new byte can be for byte reusage
 
 # ------------------------------------------------------------------
 # Helper functions for genlogic()
